@@ -30,10 +30,34 @@ def main():
     print("3. Multiplicación")
     print("4. División")
     
+def validar_numero(valor):
+    """Valida que el valor sea un número válido"""
     try:
-        opcion = input("Seleccione operación (1-4): ")
-        num1 = float(input("Ingrese primer número: "))
-        num2 = float(input("Ingrese segundo número: "))
+        return float(valor)
+    except ValueError:
+        raise ValueError(f"'{valor}' no es un número válido")
+
+# Modificar la función main para usar validación:
+def main():
+    """Función principal de la calculadora"""
+    print("=== CALCULADORA BÁSICA ===")
+    print("Operaciones disponibles:")
+    print("1. Suma")
+    print("2. Resta")
+    print("3. Multiplicación")
+    print("4. División")
+    
+    try:
+        opcion = input("Seleccione operación (1-4): ").strip()
+        
+        if opcion not in ["1", "2", "3", "4"]:
+            print("Error: Opción debe ser 1, 2, 3 o 4")
+            return
+            
+        num1 = validar_numero(input("Ingrese primer número: "))
+        num2 = validar_numero(input("Ingrese segundo número: "))
+        
+        # Resto del código igual...
         
         if opcion == "1":
             resultado = suma(num1, num2)
