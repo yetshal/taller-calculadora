@@ -21,6 +21,13 @@ def division(a, b):
         raise ValueError("Error: No se puede dividir por cero")
     return a / b
 
+def validar_numero(valor):
+    """Valida que el valor sea un número válido"""
+    try:
+        return float(valor)
+    except ValueError:
+        raise ValueError(f"'{valor}' no es un número válido")
+
 def main():
     """Función principal de la calculadora"""
     print("=== CALCULADORA BÁSICA ===")
@@ -31,9 +38,14 @@ def main():
     print("4. División")
     
     try:
-        opcion = input("Seleccione operación (1-4): ")
-        num1 = float(input("Ingrese primer número: "))
-        num2 = float(input("Ingrese segundo número: "))
+        opcion = input("Seleccione operación (1-4): ").strip()
+        
+        if opcion not in ["1", "2", "3", "4"]:
+            print("Error: Opción debe ser 1, 2, 3 o 4")
+            return
+            
+        num1 = validar_numero(input("Ingrese primer número: "))
+        num2 = validar_numero(input("Ingrese segundo número: "))
         
         if opcion == "1":
             resultado = suma(num1, num2)
